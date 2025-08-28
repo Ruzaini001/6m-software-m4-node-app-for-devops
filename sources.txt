@@ -1,0 +1,1 @@
+https://medium.com/@gadharinayan/setting-up-eslint-prettier-and-airbnb-style-guide-in-react-18-with-typescript-a-deep-dive-4b0aadaf9b97
