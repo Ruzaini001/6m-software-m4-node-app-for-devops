@@ -63,11 +63,11 @@ jobs:
       - docker/check
       # Use Docker orb to build and push image
       - docker/build:
-          image: thinkdaniel/test-repository
+          image: ruzaini93/6m-software-m4-node-app-for-devops
           # tag with current git revision (commit hash) and latest tag
           tag: << pipeline.git.revision >>,latest
       - docker/push:
-          image: thinkdaniel/test-repository
+          image: thinkda/6m-software-m4-node-app-for-devops
           tag: << pipeline.git.revision >>,latest
 
 # Define the workflow for job execution order
