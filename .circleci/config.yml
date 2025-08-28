@@ -81,17 +81,41 @@ jobs:
       - setup_remote_docker
       - heroku/install
       - checkout
+      - docker/check
       - run:
-          name: Heroku Container Push
+          name: Deploy to Heroku
           command: |
+            echo "Deploying pre-built image to Heroku..."
             heroku container:login
-            # Use the Heroku container stack
-            # Special container stack is required to deploy Docker images
-            heroku stack:set container -a ruzaini93-su-devops
-            # Build Docker image and push to Heroku container registry
-            heroku container:push web -a ruzaini93-su-devops
-            # Release the Docker image
-            heroku container:release web -a ruzaini93-su-devops
+            # Use Heroku container stack
+            heroku stack:set container --app ruzaini93-su-devops
+            # Pull image that was built in publish job
+            docker pull ruzaini93/test-repository:<< pipeline.git.revision >>
+            # Tag it for Heroku
+            docker tag ruzaini93/test-repository:<< pipeline.git.revision >> registry.heroku.com/ruzaini93-su-devops/web
+            # Push to Heroku Container Registry
+            docker push registry.heroku.com/ruzaini93-su-devops/web
+            # Release the pushed Docker image
+            heroku container:release web --app ruzaini93-su-devops
+
+  # deploy:
+  #   docker:
+  #     - image: cimg/node:16.10
+  #   steps:
+  #     - setup_remote_docker
+  #     - heroku/install
+  #     - checkout
+  #     - run:
+  #         name: Heroku Container Push
+  #         command: |
+  #           heroku container:login
+  #           # Use the Heroku container stack
+  #           # Special container stack is required to deploy Docker images
+  #           heroku stack:set container -a ruzaini93-su-devops
+  #           # Build Docker image and push to Heroku container registry
+  #           heroku container:push web -a ruzaini93-su-devops
+  #           # Release the Docker image
+  #           heroku container:release web -a ruzaini93-su-devops
 
 
 # Define the workflow for job execution order

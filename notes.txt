@@ -1,0 +1,13 @@
+Build -> Test -> Publish to Docker Hub -> Pull from Docker Hub -> Deploy to Heroku
+
+CI/CD pattern:
+Build and Test
+Publish to registry (Docker Hub)
+Deploy - pull the same image from registry to deploy to Heroku
+
+
+
+
+
+
+https://medium.com/@gadharinayan/setting-up-eslint-prettier-and-airbnb-style-guide-in-react-18-with-typescript-a-deep-dive-4b0aadaf9b97
