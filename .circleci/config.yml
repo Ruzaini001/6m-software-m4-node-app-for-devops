@@ -50,8 +50,9 @@ jobs:
       - run: |
           echo "Running tests..."
           npm run test
+
   # this job needs to build and push Docker images 
-  publish:
+  build-and-push:
     # CircleCI provides a special executor that allows Docker-in-Docker
     # so that you run docker build, push, etc
     executor: docker/docker
@@ -68,11 +69,11 @@ jobs:
       - docker/check
       # Use Docker orb to build and push image
       - docker/build:
-          image: ruzaini93/test-repository
+          image: ruzaini93/education-space
           # tag with current git revision (commit hash) and latest tag
           tag: << pipeline.git.revision >>,latest
       - docker/push:
-          image: ruzaini93/test-repository
+          image: ruzaini93/education-space
           tag: << pipeline.git.revision >>,latest
   deploy:
     docker:
@@ -129,13 +130,13 @@ workflows:
       - test: # Run test job after build
           requires:
             - build # test depends on build
-      - publish:
+      - build-and-push:
           requires:
             - test
             - lint
       - deploy:
           requires:
-            - publish
+            - build-and-push
 
 
 
