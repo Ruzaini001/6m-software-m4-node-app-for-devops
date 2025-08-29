@@ -89,15 +89,19 @@ jobs:
             echo "Deploying pre-built image to Heroku..."
             heroku container:login
             # Use Heroku container stack
-            heroku stack:set container --app ruzaini93-su-devops
+            heroku stack:set container --app ruzaini93-education-space
             # Pull image that was built in publish job
-            docker pull ruzaini93/test-repository:<< pipeline.git.revision >>
+            docker pull ruzaini93/education-space:<< pipeline.git.revision >>
             # Tag it for Heroku
-            docker tag ruzaini93/test-repository:<< pipeline.git.revision >> registry.heroku.com/ruzaini93-su-devops/web
+            docker tag ruzaini93/education-space:<< pipeline.git.revision >> registry.heroku.com/ruzaini93-education-space/web
             # Push to Heroku Container Registry
-            docker push registry.heroku.com/ruzaini93-su-devops/web
+            docker push registry.heroku.com/ruzaini93-education-space/web
             # Release the pushed Docker image
-            heroku container:release web --app ruzaini93-su-devops
+            heroku container:release web --app ruzaini93-education-space
+
+
+
+
 
   # deploy:
   #   docker:
