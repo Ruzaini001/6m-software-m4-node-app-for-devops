@@ -123,20 +123,51 @@ jobs:
 workflows:
   simple_workflow:
     jobs:
-      - build # Run build job first
+      - build: # Run build job first
+          filters:
+            branches:
+              only:
+                - main
+                - release
+
       - lint: # Run lint job after build
           requires:
             - build
+          filters:
+            branches:
+              only:
+                - release
       - test: # Run test job after build
           requires:
             - build # test depends on build
+          filters:
+            branches:
+              only:
+                - main
+                - release
+
       - build-and-push:
           requires:
             - test
             - lint
+          filters:
+            branches:
+              only:
+                - release
       - deploy:
           requires:
             - build-and-push
+          filters:
+            branches:
+              only:
+                - release
+
+
+
+
+
+
+
 
 
 
