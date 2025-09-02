@@ -176,10 +176,19 @@ workflows:
               only:
                 - main
                 - release
+      - scan:   # 👈 added scan job
+          requires:
+            - test   # run scan after tests complete
+          filters:
+            branches:
+              only:
+                - main
+                - release
       - build-and-push:
           requires:
             - test
             - lint
+            - scan
           filters:
             branches:
               only:
