@@ -61,7 +61,7 @@ jobs:
       - setup_remote_docker      
       - docker/check:
           docker-username: ruzaini93
-          docker-password: Black@1234567
+          docker-password: S9302584i
       - run: docker build -t $IMAGE_NAME .
       - snyk/scan: 
           docker-image-name: $IMAGE_NAME
