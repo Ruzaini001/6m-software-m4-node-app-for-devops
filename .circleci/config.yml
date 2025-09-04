@@ -55,13 +55,13 @@ jobs:
     docker:
       - image: cimg/node:16.10
     environment:
-      IMAGE_NAME: ruzaini93/education-space:<< pipeline.git.revision >>
+      IMAGE_NAME: ruzaini93/education-space
     steps:
       - checkout
       - setup_remote_docker      
       - docker/check:
-          docker-username: ruzaini93
-          docker-password: S9302584i
+          docker-username: DOCKERHUB_LOGIN
+          docker-password: DOCKERHUB_PASSWORD
       - run: docker build -t $IMAGE_NAME .
       - snyk/scan: 
           docker-image-name: $IMAGE_NAME
