@@ -4,7 +4,7 @@ version: 2.1
 orbs:
   node: circleci/node@7.1.1
   docker: circleci/docker@3.0.0
-  heroku: circleci/heroku@2.0.0
+  # heroku: circleci/heroku@2.0.0
   snyk: snyk/snyk@2.3.0
 # commands - resuable sets of steps
 commands:
@@ -139,14 +139,16 @@ jobs:
   #           # Release the pushed Docker image
   #           heroku container:release web --app thinkdaniel-su-devops
 
-  # deploy:
-  #   docker:
-  #     - image: cimg/node:16.10
-  #   steps:
-  #     - setup_remote_docker
+  deploy:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - setup_remote_docker
   #     - heroku/install
-  #     - checkout
-  #     - run:
+      - checkout
+      - run:
+            name: Deploy (placeholder)
+            command: echo "Deploying app..."
   #         name: Heroku Container Push
   #         command: |
   #           heroku container:login
