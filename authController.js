@@ -108,7 +108,7 @@ function transfer(req, res) {
   }
 
   // Verify JWT in cookie
-  jwt.verify(token, "SECRET_AT_LEAST_32_CHARS_LONG", (err, decoded) => {
+  jwt.verify(token, "NVNh119k8oEJXjr2raB9TXOciCprjFzZNDWgBmHwYuuDb/YpcPzw5zhvtye+jLwv", (err, decoded) => {
     if (err) {
       console.log("Invalid token. You are not authorized.");
       return res
